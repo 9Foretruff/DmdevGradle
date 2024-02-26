@@ -1,2 +1,6 @@
 rootProject.name = 'DmdevGradle'
 
+println "Init phase , settings file : ${toString()}"
+println "gradle id: ${gradle.hashCode()}"
+println "dir ${settings.settingsDir}"
+
