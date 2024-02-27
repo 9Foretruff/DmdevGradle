@@ -1,6 +1,27 @@
 println "conf phase"
 println "gradle id: ${gradle.hashCode()}"
 println "root ${rootProject.hashCode()}, ${project.hashCode()} , ${gradle.rootProject.hashCode()}"
+// task = new DefaultTask
+
+//3
+task hello(description: "hello task", group: "foretruff") {
+    println "hello task"
+    println "task: $description , group: $group , actions: ${actions.size()}"
+//    description = "hello task"
+//    group = "foretruff"
+}
+
+//tasks.findByName("hello")
+//1
+//hello.description = "hello task"
+//hello.group = "foretruff"
+
+//2
+//hello {
+//    println "hellot task"
+//    description = "hello task"
+//    group = "foretruff"
+//}
 
 
 //plugins {
