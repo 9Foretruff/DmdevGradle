@@ -22,6 +22,51 @@ task hello(description: "hello task", group: "foretruff", type: DefaultTask) {
     println "task: $description , group: $group , actions: ${actions.size()}"
 }
 
+task first {
+    doLast {
+        println "task 1"
+    }
+}
+
+task second {
+    doLast {
+        println "task 2"
+    }
+}
+
+task third {
+    doLast {
+        println "task 3"
+    }
+}
+
+task fourth {
+    doLast {
+        println "task 4"
+    }
+}
+
+//fourth.dependsOn(second)
+//second.dependsOn(first)
+//second.finalizedBy third // после таски 2 должна быть таска 3
+
+fourth.dependsOn first
+fourth.dependsOn second
+fourth.dependsOn third
+
+second.mustRunAfter first
+
+gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
+    println "----- Graph"
+    graph.allTasks.each {
+        println "${it.name}"
+    }
+}
+
+//1
+//2  4
+//3
+
 //tasks.findByName("hello")
 //1
 //hello.description = "hello task"
