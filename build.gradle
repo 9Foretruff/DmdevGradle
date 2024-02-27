@@ -1,7 +1,23 @@
+import java.time.LocalDate
+
 println "conf phase"
 println "gradle id: ${gradle.hashCode()}"
 println "root ${rootProject.hashCode()}, ${project.hashCode()} , ${gradle.rootProject.hashCode()}"
 // task = new DefaultTask
+
+ext {
+    javaVersion = 16
+    currentDte = LocalDate.now()
+}
+
+println ext.javaVersion
+println project.ext.javaVersion
+println javaVersion
+println "----All properties"
+
+println project.properties
+println "----system properties"
+println System.getProperty("sys.example")
 
 //3
 // Project = [Task1 , Task2]
