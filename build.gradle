@@ -63,6 +63,8 @@ gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
     }
 }
 
+defaultTasks "fourth"
+
 //1
 //2  4
 //3
