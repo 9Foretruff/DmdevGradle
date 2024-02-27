@@ -4,11 +4,22 @@ println "root ${rootProject.hashCode()}, ${project.hashCode()} , ${gradle.rootPr
 // task = new DefaultTask
 
 //3
-task hello(description: "hello task", group: "foretruff") {
+// Project = [Task1 , Task2]
+//Task1 = [Action1 , Action2] -> action.execution ( execution phase )
+task hello(description: "hello task", group: "foretruff", type: DefaultTask) {
     println "hello task"
-    println "task: $description , group: $group , actions: ${actions.size()}"
 //    description = "hello task"
 //    group = "foretruff"
+    doLast {
+        println "execution phase, Action 1 "
+    }
+    doFirst {
+        println "execution phase, Action 2 "
+    }
+    doLast {
+        println "execution phase, Action 3 "
+    }
+    println "task: $description , group: $group , actions: ${actions.size()}"
 }
 
 //tasks.findByName("hello")
