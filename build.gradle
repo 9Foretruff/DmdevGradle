@@ -40,16 +40,27 @@ configurations.runtimeClasspath.files.each { println it }
 
 
 jar {
+
+    def jars = configurations.runtimeClasspath.files.collect { "lib/$it.name" }
     manifest {
-        attributes "Main-Class": "org.example.Main"
+        attributes "Main-Class": "org.example.Main",
+                "Class-Path": jars.join(" ")
     }
 
-    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 
-    from(configurations.runtimeClasspath.files.collect {
-        zipTree(it)
-    })
+//    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+//
+//    from(configurations.runtimeClasspath.files.collect {
+//        zipTree(it)
+//    })
 }
+
+task copyAllDependencies(type: Copy) {
+    from(configurations.runtimeClasspath.files) // джерело - каталог зі збіркою JAR
+    into("${buildDir}/libs/lib") // призначення - каталог, куди копіювати JAR
+}
+
+jar.dependsOn('copyAllDependencies')
 
 
 //sourceSets {
