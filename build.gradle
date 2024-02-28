@@ -5,6 +5,17 @@ plugins {
 apply from: 'script.gradle'
 //apply plugin: CustomPlugin.class
 //apply plugin: 'java'
+
+repositories { // порядок важен
+    //~/.gradle/caches -- offline
+    mavenLocal() // ~/.m2/repository
+    maven{
+        name "foretruff"
+        url "http://nexus.foretruff/repository"
+    }
+    mavenCentral()
+}
+
 sourceSets {
     main {
         java {
