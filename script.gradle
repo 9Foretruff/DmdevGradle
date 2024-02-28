@@ -1,0 +1,119 @@
+import java.time.LocalDate
+
+println "conf phase"
+println "gradle id: ${gradle.hashCode()}"
+println "root ${rootProject.hashCode()}, ${project.hashCode()} , ${gradle.rootProject.hashCode()}"
+// task = new DefaultTask
+
+ext {
+    javaVersion = 16
+    currentDte = LocalDate.now()
+}
+
+println ext.javaVersion
+println project.ext.javaVersion
+println javaVersion
+println "----All properties"
+
+println project.properties
+println "----system properties"
+println System.getProperty("sys_example")
+
+//3
+// Project = [Task1 , Task2]
+//Task1 = [Action1 , Action2] -> action.execution ( execution phase )
+task hello(description: "hello task", group: "foretruff", type: DefaultTask) {
+    println "hello task"
+//    description = "hello task"
+//    group = "foretruff"
+    doLast {
+        println "execution phase, Action 1 "
+    }
+    doFirst {
+        println "execution phase, Action 2 "
+    }
+    doLast {
+        println "execution phase, Action 3 "
+    }
+    println "task: $description , group: $group , actions: ${actions.size()}"
+}
+
+task first {
+    doLast {
+        println "task 1"
+    }
+}
+
+task second {
+    doLast {
+        println "task 2"
+    }
+}
+
+task third {
+    doLast {
+        println "task 3"
+    }
+}
+
+task fourth {
+    doLast {
+        println "task 4"
+    }
+}
+
+//fourth.dependsOn(second)
+//second.dependsOn(first)
+//second.finalizedBy third // после таски 2 должна быть таска 3
+
+fourth.dependsOn first
+fourth.dependsOn second
+fourth.dependsOn third
+
+second.mustRunAfter first
+
+gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
+    println "----- Graph"
+    graph.allTasks.each {
+        println "${it.name}"
+    }
+}
+
+defaultTasks "fourth"
+
+//1
+//2  4
+//3
+
+//tasks.findByName("hello")
+//1
+//hello.description = "hello task"
+//hello.group = "foretruff"
+
+//2
+//hello {
+//    println "hellot task"
+//    description = "hello task"
+//    group = "foretruff"
+//}
+
+
+//plugins {
+//    id 'java'
+//}
+//
+//group = 'org.example'
+//version = '1.0-SNAPSHOT'
+//
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    testImplementation platform('org.junit:junit-bom:5.9.1')
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+//}
+//
+//test {
+//    useJUnitPlatform()
+//}
