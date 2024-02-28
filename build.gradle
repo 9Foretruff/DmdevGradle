@@ -36,6 +36,22 @@ dependencies {
     implementation "org.springframework:spring-aop"
 }
 
+configurations.runtimeClasspath.files.each { println it }
+
+
+jar {
+    manifest {
+        attributes "Main-Class": "org.example.Main"
+    }
+
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+    from(configurations.runtimeClasspath.files.collect {
+        zipTree(it)
+    })
+}
+
+
 //sourceSets {
 //    main {
 //        java {
