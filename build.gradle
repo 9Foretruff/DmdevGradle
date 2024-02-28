@@ -19,20 +19,21 @@ repositories { // порядок важен
 configurations {
     all {
         resolutionStrategy {
-            force("org.springframework:spring-aop:6.1.2")
+//            force("org.springframework:spring-aop:6.1.2")
         }
     }
 }
 
 dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.2.3')
 //    add("implementation", [group: "org.springframework", name: "spring-webmvc", version: "5.3.9"])
-    implementation("org.springframework:spring-webmvc:6.1.3") {
+    implementation("org.springframework:spring-webmvc") {
 //        exclude(group:"org.springframework" , module:"spring-aop")
 //        transitive false
 //        force(true) // что бы эта зависимость перетерла другую зависимость
     }
 
-    implementation "org.springframework:spring-aop:6.1.2"
+    implementation "org.springframework:spring-aop"
 }
 
 //sourceSets {
