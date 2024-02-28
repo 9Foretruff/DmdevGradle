@@ -1,5 +1,10 @@
-//apply from: 'script.gradle'
-apply plugin: CustomPlugin.class
+plugins{
+    id 'java'
+}
+
+apply from: 'script.gradle'
+//apply plugin: CustomPlugin.class
+//apply plugin: 'java'
 
 
 //buildSrc  --id 'custom'
