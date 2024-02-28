@@ -15,7 +15,7 @@ class CustomPlugin implements Plugin<Project> {
         addHelloTask(target)
     }
 
-    void addHelloTask(Project target) {
+    static void addHelloTask(Project target) {
         def map = [description: "hello task", group: "foretruff", type: DefaultTask]
         target.task(map, "hello") {
             println "hello task"
