@@ -1,10 +1,23 @@
-plugins{
+plugins {
     id 'java'
 }
 
 apply from: 'script.gradle'
 //apply plugin: CustomPlugin.class
 //apply plugin: 'java'
+sourceSets {
+    main {
+        java {
+//            srcDir("$buildDir/generadted-sources/querydsl")
+        }
+//        resources {
+//
+//        }
+    }
+    test {
+
+    }
+}
 
 
 //buildSrc  --id 'custom'
