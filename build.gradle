@@ -16,6 +16,10 @@ repositories { // порядок важен
     mavenCentral()
 }
 
+//configurations {
+//
+//}
+
 dependencies {
 //    add("implementation", [group: "org.springframework", name: "spring-webmvc", version: "5.3.9"])
     implementation "org.springframework:spring-webmvc:6.1.3"
