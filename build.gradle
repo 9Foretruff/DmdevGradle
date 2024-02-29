@@ -144,3 +144,7 @@ jar.dependsOn('copyAllDependencies')
 //
 //}
 
+//
+//wrapper{
+//    gradleVersion = "7.8.2"
+//}
