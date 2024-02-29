@@ -11,10 +11,27 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+    implementation project (':service')
+    implementation project (':common:util')
+
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
+}
+
+task deployTomcat(type: Copy) {
+    from(war.archiveFile.get())
+    into("D:\\Courses\\apache-tomcat-10.1.15\\webapps")
+}
+
+deployTomcat.dependsOn war
+assemble.dependsOn deployTomcat
+
+war {
+    archiveFileName = "foretruff.war"
 }

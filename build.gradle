@@ -72,13 +72,6 @@ war {
     archiveFileName = "foretruff.war"
 }
 
-task deployTomcat(type: Copy) {
-    from(war.archiveFile.get())
-    into("D:\\Courses\\apache-tomcat-10.1.15\\webapps")
-}
-
-deployTomcat.dependsOn war
-assemble.dependsOn deployTomcat
 
 jar.dependsOn('copyAllDependencies')
 

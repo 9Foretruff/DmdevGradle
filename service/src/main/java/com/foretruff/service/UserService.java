@@ -1,7 +1,7 @@
-package org.example.service;
+package com.foretruff.service;
 
-import org.example.dao.UserDao;
-import org.example.model.User;
+import com.foretruff.dao.UserDao;
+import com.foretruff.model.User;
 
 import java.util.List;
 
