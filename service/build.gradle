@@ -1,5 +1,7 @@
 plugins {
     id 'java-library'
+    id 'jacoco'
+//    id 'checkstyle'
 }
 
 group = 'org.example'
@@ -11,10 +13,14 @@ repositories {
 
 dependencies {
     api project(":database")
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 }
 
 test {
+    maxParallelForks 3
     useJUnitPlatform()
 }
+
+test.finalizedBy jacocoTestReport
+jacocoTestReport.dependsOn test

@@ -1,5 +1,7 @@
 import org.apache.commons.lang3.*
 
+import static org.gradle.api.JavaVersion.VERSION_19
+
 buildscript {
     repositories {
         mavenCentral()
@@ -50,8 +52,8 @@ configurations {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_19
-    targetCompatibility = JavaVersion.VERSION_19
+    sourceCompatibility = VERSION_19
+    targetCompatibility = VERSION_19
 }
 
 dependencies {
