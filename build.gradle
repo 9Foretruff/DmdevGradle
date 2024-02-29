@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 apply from: 'script.gradle'
@@ -24,6 +25,11 @@ configurations {
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+}
+
 dependencies {
     implementation platform('org.springframework.boot:spring-boot-dependencies:3.2.3')
 //    add("implementation", [group: "org.springframework", name: "spring-webmvc", version: "5.3.9"])
@@ -34,6 +40,8 @@ dependencies {
     }
 
     implementation "org.springframework:spring-aop"
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
 }
 
 configurations.runtimeClasspath.files.each { println it }
@@ -59,6 +67,18 @@ task copyAllDependencies(type: Copy) {
     from(configurations.runtimeClasspath.files) // джерело - каталог зі збіркою JAR
     into("${buildDir}/libs/lib") // призначення - каталог, куди копіювати JAR
 }
+
+war {
+    archiveFileName = "foretruff.war"
+}
+
+task deployTomcat(type: Copy) {
+    from(war.archiveFile.get())
+    into("D:\\Courses\\apache-tomcat-10.1.15\\webapps")
+}
+
+deployTomcat.dependsOn war
+assemble.dependsOn deployTomcat
 
 jar.dependsOn('copyAllDependencies')
 
