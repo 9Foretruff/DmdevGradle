@@ -1,8 +1,13 @@
+//import com.foretruff.plugin.CustomPlugin
+
 plugins {
     id 'java-library'
     id 'jacoco'
+    id 'custom-foretruff'
 //    id 'checkstyle'
 }
+
+//apply plugin: CustomPlugin
 
 group = 'org.example'
 version = 'unspecified'
